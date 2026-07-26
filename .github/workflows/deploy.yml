@@ -67,5 +67,5 @@ jobs:
         run: |
           export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(node -v 2>/dev/null)/bin:~/.npm-global/bin
           npx pm2 delete node-app || true
-          npx pm2 start app.js --name "node-app"
+          npx pm2 start src/server.js --name "node-app"
           npx pm2 save
