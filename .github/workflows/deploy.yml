@@ -24,12 +24,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        # If package.json is inside OSTAD-Assignment-module-3 for the test job as well:
-        # working-directory: ./OSTAD-Assignment-module-3
         run: npm ci
 
       - name: Run tests and capture results
-        # working-directory: ./OSTAD-Assignment-module-3
         run: |
           mkdir -p test-results
           npm test > test-results/results.txt 2>&1 || true
@@ -64,11 +61,9 @@ jobs:
           cat downloaded-results/results.txt
 
       - name: Install production dependencies
-        working-directory: ./OSTAD-Assignment-module-3
         run: npm ci --only=production
 
       - name: Deploy application with PM2
-        working-directory: ./OSTAD-Assignment-module-3
         run: |
           export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(node -v 2>/dev/null)/bin:~/.npm-global/bin
           npx pm2 delete node-app || true
