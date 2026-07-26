@@ -61,14 +61,15 @@ jobs:
           cat downloaded-results/results.txt
 
       - name: Install production dependencies
+        # Working directory points to the subfolder containing package.json & app.js
+        working-directory: ./OSTAD-Assignment-module-3
         run: npm ci --only=production
 
       - name: Deploy application with PM2
+        # Working directory points to the subfolder containing app.js
+        working-directory: ./OSTAD-Assignment-module-3
         run: |
-          # Include standard global NPM binary paths into the execution environment
           export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(node -v 2>/dev/null)/bin:~/.npm-global/bin
-          
-          # Delete existing instance if running to clear previous states, then start clean
           npx pm2 delete node-app || true
           npx pm2 start app.js --name "node-app"
           npx pm2 save
